@@ -1,0 +1,4 @@
+host: 'http://localhost:3000/'
+project: 'project_name'
+username: 'username'
+password: 'password'

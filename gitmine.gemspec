@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   s.files = [
     ".document",
      ".gitignore",
+     ".gitmine.yml",
      "Gemfile",
      "LICENSE",
      "README.rdoc",

@@ -13,4 +13,4 @@ Rspec.configure do |config|
   config.mock_with :rspec
 end
 
-Redmine::CONFIG_FILE = File.join(File.dirname(__FILE__), 'config.yml')
+Issue::CONFIG_FILE = File.join(File.dirname(__FILE__), 'config.yml')

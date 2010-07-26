@@ -1,6 +1,19 @@
 = gitmine
 
-Description goes here.
+Gitmine displays the last 10 commits of your repo and their associated redmine ticket status.
+
+== Install
+  gem install gitmine
+
+== Setup
+Put the config file '.gitmine.yml' at the root of your project. Here is a sample file:
+<pre>
+host:     'https://redmine.yourcompany.com
+api_key:  'your_api_key'
+</pre>
+
+Then run gitmine at the root of your project.
+
 
 == Note on Patches/Pull Requests
  

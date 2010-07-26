@@ -1,0 +1,11 @@
+require 'rubygems'
+require "bundler"
+Bundler.load
+
+require 'grit'
+require 'yaml'
+require 'HTTParty'
+
+require File.dirname(__FILE__) + '/../lib/gitmine'
+
+Gitmine.run

@@ -1,7 +1,8 @@
-HOST = 'https://redmine.versapay.com'
-PROJECT = 'eft'
-USERNAME = 'philippe.creux'
-PASSWORD = 'temporary_stuff'
+require 'rubygems'
+
+require 'grit'
+require 'yaml'
+require 'HTTParty'
 
 class Gitmine
   def self.run

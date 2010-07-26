@@ -3,9 +3,10 @@ $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 
 #ENV['BUNDLE_GEMFILE'] = File.expand_path('../../Gemfile', __FILE__)
 
-require 'rubygems'
 require "bundler"
-Bundler.require
+Bundler.load
+
+require 'rspec'
 
 require 'gitmine'
 

@@ -10,7 +10,7 @@ describe Issue do
 
   describe "#config" do
     it "should load the config from config.yml" do
-      issue.config.should == {"project"=>"project_name", "host"=>"http://localhost:3000", "api_key"=>"api_key"}
+      issue.config.should == {"host"=>"http://localhost:3000", "api_key"=>"api_key"}
     end
   end
 

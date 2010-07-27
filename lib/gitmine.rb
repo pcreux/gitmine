@@ -35,7 +35,7 @@ class Gitmine
     end
 
     # Issue associated with this commit
-    # Return nil if teir is no associated issue
+    # Return nil if their is no associated issue
     def issue
       @issue ||= Issue.get_for_commit(message)
     end

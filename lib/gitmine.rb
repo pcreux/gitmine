@@ -16,10 +16,11 @@ class Gitmine
 
   def initialize
     @repo = Grit::Repo.new(ENV['PWD'])
+    @branch = File.read('./.git/HEAD').match(/^ref: refs\/heads\/(.+)/)[1]
   end
 
   def commits
-    @repo.commits.map do |c|
+    @repo.commits(@branch).map do |c|
       Commit.new(c)
     end
   end

@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe Commit do
+describe Gitmine::Commit do
   let(:grit_commit) { Grit::Commit.create(nil, {:message => "Commit message"}) }
-  let(:commit) { Commit.new(grit_commit) }
+  let(:commit) { Gitmine::Commit.new(grit_commit) }
   let(:issue)  { Issue.new }
 
   describe "#new" do

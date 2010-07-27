@@ -25,7 +25,7 @@ describe Gitmine do
      
   describe "#commits" do
     it "should return Gitmine commits" do
-      gitmine.commits.first.should be_a Commit
+      gitmine.commits.first.should be_a Gitmine::Commit
     end
     it "should return commits for the current branch" do
       repo.should_receive(:commits).with('wip')

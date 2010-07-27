@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{gitmine}
-  s.version = "0.1.1"
+  s.version = "0.1.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Philippe Creux"]
-  s.date = %q{2010-07-26}
+  s.date = %q{2010-07-27}
   s.default_executable = %q{gitmine}
   s.description = %q{Git log with status of associated redmine tickets}
   s.email = %q{pcreux@gmail.com}
@@ -32,6 +32,7 @@ Gem::Specification.new do |s|
      "gitmine.gemspec",
      "lib/gitmine.rb",
      "spec/commit_msg_to_issue_id_spec.rb",
+     "spec/commit_spec.rb",
      "spec/config.yml",
      "spec/gitmine_spec.rb",
      "spec/issue_spec.rb",
@@ -44,6 +45,7 @@ Gem::Specification.new do |s|
   s.summary = %q{Git log with status of associated redmine tickets}
   s.test_files = [
     "spec/commit_msg_to_issue_id_spec.rb",
+     "spec/commit_spec.rb",
      "spec/gitmine_spec.rb",
      "spec/issue_spec.rb",
      "spec/spec_helper.rb"

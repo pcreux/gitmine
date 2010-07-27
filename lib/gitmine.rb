@@ -25,6 +25,7 @@ class Gitmine
     end
   end
 
+
   class Commit 
     attr_reader :grit_commit
 
@@ -52,6 +53,50 @@ class Gitmine
     end  
   end
 
+  class Issue
+    CONFIG_FILE = './.gitmine.yml'
+
+    attr_reader :id, :subject, :status
+
+    # Parse the commit_message and get the associated issue if any.
+    def self.get_for_commit(commit_message)
+      issue_id = CommitMsgToIssueId.parse(commit_message)
+      issue_id ? Issue.get(issue_id) : nil
+    end
+
+    # Get the issue from redmine
+    def self.get(issue_id)
+      Issue.new.tap { |issue|
+        issue.build_via_issue_id(issue_id)
+      }
+    end
+
+    # Config from .gitmine.yml
+    def config
+      @config ||= YAML.load_file(CONFIG_FILE)
+    end
+
+    # Get attributes from redmine and set them all
+    def build_via_issue_id(issue_id)
+      @id = issue_id
+      data = get(issue_id).parsed_response['issue']
+      @subject = data['subject']
+      @status = data['status']['name']
+    end
+
+    protected
+
+    # Url to redmine/issues
+    def url(id)
+      "#{config['host']}/issues/#{id}.xml?key=#{config['api_key']}"
+    end
+
+    # http_get the issue using HTTParty
+    def get(issue_id)
+      HTTParty.get(url(issue_id))
+    end
+  end
+
 end
 
 
@@ -70,46 +115,3 @@ module CommitMsgToIssueId
   end
 end
 
-class Issue
-  CONFIG_FILE = './.gitmine.yml'
-
-  attr_reader :id, :subject, :status
-
-  # Parse the commit_message and get the associated issue if any.
-  def self.get_for_commit(commit_message)
-    issue_id = CommitMsgToIssueId.parse(commit_message)
-    issue_id ? Issue.get(issue_id) : nil
-  end
-
-  # Get the issue from redmine
-  def self.get(issue_id)
-    Issue.new.tap { |issue|
-      issue.build_via_issue_id(issue_id)
-    }
-  end
-
-  # Config from .gitmine.yml
-  def config
-    @config ||= YAML.load_file(CONFIG_FILE)
-  end
-
-  # Get attributes from redmine and set them all
-  def build_via_issue_id(issue_id)
-    @id = issue_id
-    data = get(issue_id).parsed_response['issue']
-    @subject = data['subject']
-    @status = data['status']['name']
-  end
-
-  protected
-
-  # Url to redmine/issues
-  def url(id)
-    "#{config['host']}/issues/#{id}.xml?key=#{config['api_key']}"
-  end
-
-  # http_get the issue using HTTParty
-  def get(issue_id)
-    HTTParty.get(url(issue_id))
-  end
-end

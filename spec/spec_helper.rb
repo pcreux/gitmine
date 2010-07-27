@@ -15,4 +15,4 @@ Rspec.configure do |config|
   config.mock_with :rspec
 end
 
-Issue::CONFIG_FILE = File.join(File.dirname(__FILE__), 'config.yml')
+Gitmine::Issue::CONFIG_FILE = File.join(File.dirname(__FILE__), 'config.yml')

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Issue do
-  let(:issue) { Issue.new }
+describe Gitmine::Issue do
+  let(:issue) { Gitmine::Issue.new }
   [:id, :subject, :status].each do |a|
     it "should have an #{a}" do
       issue.should respond_to a
@@ -26,16 +26,16 @@ describe Issue do
     it "should parse the commit message to find a commit_id and call #get" do
       commit_msg = 'A commit msg Issue #123'
       CommitMsgToIssueId.should_receive(:parse).with(commit_msg)
-      Issue.get_for_commit(commit_msg)
+      Gitmine::Issue.get_for_commit(commit_msg)
     end
   end
 
   describe "#get (class method)" do
     it "should build_via_issue_id" do
-      issue = Issue.new
-      Issue.should_receive(:new) { issue }
+      issue = Gitmine::Issue.new
+      Gitmine::Issue.should_receive(:new) { issue }
       issue.should_receive(:build_via_issue_id)
-      Issue.get(123)
+      Gitmine::Issue.get(123)
     end
   end
 

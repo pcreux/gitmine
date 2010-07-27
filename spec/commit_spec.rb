@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Gitmine::Commit do
   let(:grit_commit) { Grit::Commit.create(nil, {:message => "Commit message"}) }
   let(:commit) { Gitmine::Commit.new(grit_commit) }
-  let(:issue)  { Issue.new }
+  let(:issue)  { Gitmine::Issue.new }
 
   describe "#new" do
     it "should take a grit_commit object and store it" do
@@ -24,12 +24,12 @@ describe Gitmine::Commit do
   end
 
   it "should return issue via #Issue.get_for_commit" do
-    Issue.should_receive(:get_for_commit).with("Commit message") { issue }
+    Gitmine::Issue.should_receive(:get_for_commit).with("Commit message") { issue }
     commit.issue.should == issue
   end
 
   it "should memoize issue" do
-    Issue.should_receive(:get_for_commit).with("Commit message") { issue }.once
+    Gitmine::Issue.should_receive(:get_for_commit).with("Commit message") { issue }.once
     commit.issue.should == issue
     commit.issue.should == issue
   end

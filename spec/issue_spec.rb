@@ -25,7 +25,7 @@ describe Gitmine::Issue do
   describe "#get_for_commit" do
     it "should parse the commit message to find a commit_id and call #get" do
       commit_msg = 'A commit msg Issue #123'
-      CommitMsgToIssueId.should_receive(:parse).with(commit_msg)
+      Gitmine::Issue.should_receive(:parse_for_issue_id).with(commit_msg)
       Gitmine::Issue.get_for_commit(commit_msg)
     end
   end

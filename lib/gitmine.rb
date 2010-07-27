@@ -58,9 +58,21 @@ class Gitmine
 
     attr_reader :id, :subject, :status
 
+    # Extract the issue_id from a commit message.
+    # Examples:
+    #   CommitMsgToIssueId.parse("Message for Issue #123.")
+    #     => 123
+    #   CommitMsgToIssueId.parse("#123.")
+    #     => nil
+    #
+    def self.parse_for_issue_id(msg)
+      match = msg.match(/Issue #(\d+)/)
+      match ? match[1] : nil
+    end
+
     # Parse the commit_message and get the associated issue if any.
     def self.get_for_commit(commit_message)
-      issue_id = CommitMsgToIssueId.parse(commit_message)
+      issue_id = parse_for_issue_id(commit_message)
       issue_id ? Issue.get(issue_id) : nil
     end
 
@@ -98,20 +110,3 @@ class Gitmine
   end
 
 end
-
-
-
-module CommitMsgToIssueId
-  # Extract the issue_id from a commit message.
-  # Examples:
-  #   CommitMsgToIssueId.parse("Message for Issue #123.")
-  #     => 123
-  #   CommitMsgToIssueId.parse("#123.")
-  #     => nil
-  #
-  def self.parse(msg)
-    match = msg.match(/Issue #(\d+)/)
-    match ? match[1] : nil
-  end
-end
-

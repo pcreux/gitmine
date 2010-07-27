@@ -18,8 +18,8 @@ describe Gitmine do
   end
      
   describe "#commits" do
-    it "should return the last 10 commit messages" do
-      gitmine.commits.should == [commit_1]
+    it "should return Gitmine commits" do
+      gitmine.commits.first.should be_a Commit
     end
   end
 

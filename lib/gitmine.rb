@@ -2,7 +2,7 @@ require 'rubygems'
 
 require 'grit'
 require 'yaml'
-require 'HTTParty'
+require 'httparty'
 
 class Gitmine
   # CLI interface

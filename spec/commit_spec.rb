@@ -30,7 +30,8 @@ describe Gitmine::Commit do
 
   it "should memoize issue" do
     Gitmine::Issue.should_receive(:get_for_commit).with("Commit message") { issue }.once
-    commit.issue.should == issue
-    commit.issue.should == issue
+    2.times do
+      commit.issue.should == issue
+    end
   end
 end

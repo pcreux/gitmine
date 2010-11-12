@@ -1,0 +1,26 @@
+GEM
+  specs:
+    crack (0.1.8)
+    diff-lcs (1.1.2)
+    grit (2.0.0)
+      diff-lcs (>= 1.1.2)
+      mime-types (>= 1.15)
+    httparty (0.6.1)
+      crack (= 0.1.8)
+    mime-types (1.16)
+    rspec (2.0.0.beta.17)
+      rspec-core (= 2.0.0.beta.17)
+      rspec-expectations (= 2.0.0.beta.17)
+      rspec-mocks (= 2.0.0.beta.17)
+    rspec-core (2.0.0.beta.17)
+    rspec-expectations (2.0.0.beta.17)
+      diff-lcs (>= 1.1.2)
+    rspec-mocks (2.0.0.beta.17)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  grit
+  httparty
+  rspec (= 2.0.0.beta.17)

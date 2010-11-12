@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe Gitmine do
+describe Gitmine::Gitmine do
   before do
     File.stub!(:read) { "ref: refs/heads/wip" }
   end
 
-  let(:gitmine) { Gitmine.new }
+  let(:gitmine) { Gitmine::Gitmine.new }
 
   let(:commit_1) do
     mock(
@@ -41,7 +41,7 @@ describe Gitmine do
 
     it "should check out to the current branch" do
       Grit::Repo.should_receive(:new).with(ENV['PWD']) { grit_repo }
-      Gitmine.new
+      Gitmine::Gitmine.new
     end
   end
 end

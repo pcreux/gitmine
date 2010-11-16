@@ -27,11 +27,14 @@ module Gitmine
 
       raise "Invalid branch name. It should start with the issue number" unless issue_id
 
-      puts "Creating the remote branch #{branch_name}"
+      puts "Create the branch #{branch_name}"
+      run_cmd("git checkout -b #{branch_name}")
 
-      run_cmd("git push origin origin:refs/heads/#{branch_name}")
-      run_cmd("git checkout --track -b #{branch_name} origin/#{branch_name}")
+      puts "Push it to origin"
+      run_cmd("git push origin #{branch_name}")
 
+      puts "Make the local branch tracking the remote"
+      run_cmd("git branch --set-upstream #{branch_name} origin/#{branch_name}")
 
       puts "Adding a note to the Issue ##{issue_id}"
       note = "Branch *#{branch_name}* created from #{original_branch}"
@@ -45,7 +48,7 @@ module Gitmine
 
     def self.run_cmd(cmd)
       puts cmd
-      system cmd
+      exit! unless system(cmd)
     end
   end
 end

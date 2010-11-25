@@ -14,7 +14,21 @@ Put the config file '.gitmine.yml' at the root of your project. Here is a sample
   # Api key is required for private projects only.
   api_key:  'your_api_key'
 
-Then run gitmine at the root of your project.
+== Usage
+
+* Display the latest 10 commits and there ticket status:
+
+  $> gitmine
+  8497d68 In Progress  Philippe Creux  Add branch command. Need refactoring.Issue #10
+  b0132d2 Closed       Philippe Creux  Gitmine now works on case sensitive FS. Issue #8
+  b77fb0c N/A          Philippe Creux  Add Greg Bell as an awesome contributor.
+  9f3e464 N/A          Greg Bell       Moved CommitMsgToIssueId module into the Gitmine::I
+
+* Create a new remote branch + a tracking branch + add a note to the associated ticket:
+
+  $> gitmine branch 10-add-branch
+
+See here: http://redmine-gitmine.heroku.com/issues/10#note-1
 
 == Note on Issues
 

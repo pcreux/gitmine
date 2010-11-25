@@ -10,17 +10,9 @@ describe Gitmine::Issue do
 
   describe "#config" do
     it "should load the config from config.yml" do
-      issue.config.should == {"host"=>"http://localhost:3000", "api_key"=>"api_key"}
+      Gitmine::Issue.config.should == {"host"=>"http://redmine-gitmine.heroku.com", "github" => "pcreux/gitmine"}
     end
   end
-
-  describe "#url (protected)" do
-    it "should build up URL based on the config" do
-      issue.send(:url, '123').should == 'http://localhost:3000/issues/123.xml?key=api_key'
-    end
-
-  end
-
 
   describe "#get_for_commit" do
     it "should parse the commit message to find a commit_id and call #get" do
@@ -30,19 +22,19 @@ describe Gitmine::Issue do
     end
   end
 
-  describe "#get (class method)" do
+  describe "#find (class method)" do
     it "should build_via_issue_id" do
       issue = Gitmine::Issue.new
       Gitmine::Issue.should_receive(:new) { issue }
       issue.should_receive(:build_via_issue_id)
-      Gitmine::Issue.get(123)
+      Gitmine::Issue.find(123)
     end
   end
 
   describe "#build_via_issue_id" do
     before do
       @httparty = mock(:http_party_response, :parsed_response => {'issue' => { 'subject' => 'A subject', 'status' => {'name' => 'Completed'}}})
-      issue.stub!(:get) { @httparty }
+      issue.stub!(:http_get) { @httparty }
     end
 
     it "should get issue data and load attributes" do
@@ -58,12 +50,12 @@ describe Gitmine::Issue do
     end
   end
 
-  describe "#get (protected instance method)" do
-    it "should create a new issue via HTTParty" do
-      issue.stub!(:url) { 'the_url' }
-      HTTParty.should_receive(:get).with('the_url')
-      issue.send(:get, 123)
+  describe "#add_note" do
+    let(:httparty_response) { mock(:http_party_response, :code => 200) }
+    it "should PUT a note" do
+      issue.stub!(:id) { 1 }
+      issue.class.should_receive(:put).with('/1.xml', :query => {:notes => "Hello"}, :body => "") { httparty_response }
+      issue.add_note("Hello")
     end
   end
-
 end

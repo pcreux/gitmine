@@ -1,2 +1,2 @@
 host:     'http://redmine-gitmine.heroku.com'
-#api_key: '' # No need for api_key since the redmine project is public.
+github:   'pcreux/gitmine'

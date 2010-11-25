@@ -44,9 +44,13 @@ module Gitmine
 
     # Add a note to the Issue
     def add_note(note)
-      p self.class.put(url(self.id), 
-                     :query => {:notes => note}, 
-                     :body => "") # nginx reject requests without body
+      response = self.class.put(url(self.id), :query => {:notes => note}, :body => "") # nginx reject requests without body
+
+      if response.code == 200
+        return true
+      else
+        raise response.response
+      end
     end
 
     include HTTParty

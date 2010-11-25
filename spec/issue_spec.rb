@@ -51,9 +51,10 @@ describe Gitmine::Issue do
   end
 
   describe "#add_note" do
+    let(:httparty_response) { mock(:http_party_response, :code => 200) }
     it "should PUT a note" do
       issue.stub!(:id) { 1 }
-      issue.class.should_receive(:put).with('/1.xml', :query => {:notes => "Hello"}, :body => "")
+      issue.class.should_receive(:put).with('/1.xml', :query => {:notes => "Hello"}, :body => "") { httparty_response }
       issue.add_note("Hello")
     end
   end

@@ -31,29 +31,27 @@ class Gitmine
     issue_id = branch_name[/^\d+/]
     original_branch = File.read('./.git/HEAD').match(/^ref: refs\/heads\/(.+)/)[1]
 
-    raise "Invalid branch name. It should start with the issue number" unless issue_id
+    raise "Invalid branch name. It should look like 123-my-branch" unless branch_name[/^\d+-/]
 
     issue = Issue.find(issue_id)
 
     raise "Issue ##{issue_id} does not exists" if issue.nil?
 
-    puts "Create the branch #{branch_name}"
+    puts yellow("Create the branch #{branch_name}")
     run_cmd("git checkout -b #{branch_name}")
 
-    puts "Push it to origin"
+    puts yellow("Push it to origin")
     run_cmd("git push origin #{branch_name}")
 
-    puts "Make the local branch tracking the remote"
+    puts yellow("Make the local branch tracking the remote")
     run_cmd("git branch --set-upstream #{branch_name} origin/#{branch_name}")
 
-    puts "Adding a note to the Issue ##{issue_id}"
+    puts yellow("Adding a note to the Issue ##{issue_id}")
     note = "Branch *#{branch_name}* created from #{original_branch}"
     if Config.github
       note << %{ - "See on Github":https://github.com/#{Config.github}/tree/#{branch_name}}
       note << %{ - "Compare on Github":https://github.com/#{Config.github}/compare/#{original_branch}...#{branch_name}}
     end
-
-    puts 'Done!' if Issue.find(issue_id).add_note(note)
   end
 
   # TODO specs
@@ -88,15 +86,15 @@ class Gitmine
     puts yellow("Delete remote branch")
     issue.remote_branch.delete
 
-    #puts yellow("Delete hudson projects")
-    #issue.delete_hudson_projects
+    puts yellow("Delete hudson jobs")
+    issue.delete_hudson_jobs
 
-    #puts yellow("Set Ticket status to 'For Deploy'")
-    #issue.update_status("For Deploy")
+    puts yellow("Set Ticket status to 'reviewed'")
+    issue.update_status("reviewed")
   end
 end
 
 
-%w(config issue commit cli colors branch git).each do |filename|
+%w(config issue commit cli colors branch git hudson_job).each do |filename|
   require File.dirname(__FILE__) + "/gitmine/#{filename}.rb"
 end

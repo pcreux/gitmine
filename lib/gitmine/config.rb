@@ -20,20 +20,28 @@ class Gitmine
       end
 
       def hudson_host
-        config['hudson_host']
+        config['hudson']['host']
       end
 
       def hudson_username
-        config['username']
+        config['hudson']['username']
       end
 
       def hudson_password
-        config['password']
+        config['hudson']['password']
+      end
+
+      def statuses
+        config['statuses']
+      end
+
+      def status_reviewed
+        config['statuses']['reviewed']
       end
     end
 
     def initialize
-      path = File.join(File.dirname(__FILE__), '..', '..', CONFIG_FILE)
+      path = CONFIG_FILE
       @config = YAML.load_file(path)
     end
 

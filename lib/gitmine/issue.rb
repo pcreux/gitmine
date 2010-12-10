@@ -35,8 +35,8 @@ class Gitmine
       RemoteBranch.find(self.id)
     end
 
-    def delete_hudson_projects
-      hudson_projects.map(&:delete!)
+    def delete_hudson_jobs
+      hudson_jobs.map(&:delete!)
     end
 
     # Get attributes from redmine and set them all
@@ -52,12 +52,19 @@ class Gitmine
     # Add a note to the Issue
     def add_note(note)
       response = self.class.put(url(self.id), :query => {:notes => note}, :body => "") # nginx reject requests without body
+      raise response.response.to_s unless response.code == 200
 
-      if response.code == 200
-        return true
-      else
-        raise response.response.to_s
-      end
+      puts green("Note added to Issue ##{self.id}: #{note}")
+    end
+
+    def update_status(st)
+      status_id = Gitmine::Config.statuses[st]
+      raise "Please specify status_id in .gitmine.yml for #{st}" unless status_id
+
+      response = self.class.put(url(self.id), :query => {:issue => {:status_id => status_id }}, :body => "")
+      raise response.response.to_s unless response.code == 200
+
+      puts green("Issue ##{self.id} -> #{st}")
     end
 
     include HTTParty
@@ -76,8 +83,8 @@ class Gitmine
       self.class.get(url(issue_id))
     end
 
-    def hudson_projects
-      HudsonProject.find_by_name_including(self.id)
+    def hudson_jobs
+      HudsonJob.all_by_name_including(self.id)
     end
 
   end

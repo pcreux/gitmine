@@ -1,4 +1,4 @@
-module Gitmine
+class Gitmine
   class Issue
     CONFIG_FILE = './.gitmine.yml'
 

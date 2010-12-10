@@ -1,4 +1,4 @@
-module Gitmine::Colors
+#module Gitmine::Colors
   # Display the command, run it and raise if it fails.
   def run_cmd(cmd)
     puts blue(cmd)
@@ -42,4 +42,4 @@ module Gitmine::Colors
   def grey(text)
     color(text, "\e[90m")
   end 
-end
+#end

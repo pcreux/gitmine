@@ -58,12 +58,14 @@ class Gitmine
 
   # TODO specs
   def self.checkout(issue_id)
-    if local_branch = local_branches.select { |branch| branch[/^#{issue_id}-/] }.first
+    local_branch = LocalBranch.find(issue_id).name
+    if local_branch
       run_cmd("git checkout #{local_branch}")
       return
     end
 
-    if remote_branch = remote_branches.select { |branch| branch[/^#{issue_id}-/] }.first
+    remote_branch = RemoteBranch.find(issue_id).name
+    if remote_branch
       run_cmd("git checkout -b #{remote_branch} origin/#{remote_branch}")
       return
     end
@@ -73,41 +75,28 @@ class Gitmine
 
   # TODO specs
   def self.delete(issue_id)
-    if remote_branch = remote_branches.select { |branch| branch[/^#{issue_id}-/] }.first
-      run_cmd("git push origin :#{remote_branch}")
-    else
-      raise "Can't find branch starting with #{issue_id}"
-    end
+    RemoteBranch.find(issue_id).delete
   end
 
   # TODO specs
-  def self.local_branches
-    branches = []
-    `git branch`.each_line do |line|
-      if match = line[/\d+.*$/]
-        branches << match
-      end
-    end
+  def self.reviewed(issue_id)
+    issue = Issue.find(issue_id)
 
-    branches
-  end
+    puts yellow("Merge #{issue_id} to master and push")
+    issue.local_branch.merge_to_master
 
-  # TODO specs
-  def self.remote_branches
-    run_cmd("git fetch")
+    puts yellow("Delete remote branch")
+    issue.remote_branch.delete
 
-    branches = []
-    `git branch -r`.each_line do |line|
-      if match = line.match(/origin\/(\d+.*)/)
-        branches << match[1]
-      end
-    end
+    #puts yellow("Delete hudson projects")
+    #issue.delete_hudson_projects
 
-    branches
+    #puts yellow("Set Ticket status to 'For Deploy'")
+    #issue.update_status("For Deploy")
   end
 end
 
 
-%w(issue commit cli colors).each do |filename|
+%w(issue commit cli colors branch git).each do |filename|
   require File.dirname(__FILE__) + "/gitmine/#{filename}.rb"
 end

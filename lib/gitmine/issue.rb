@@ -34,12 +34,22 @@ class Gitmine
       }
     end
 
+    def local_branch
+      LocalBranch.find(self.id)
+    end
+
+    def remote_branch
+      RemoteBranch.find(self.id)
+    end
+
     # Get attributes from redmine and set them all
     def build_via_issue_id(issue_id)
       @id = issue_id
       data = http_get(issue_id).parsed_response['issue']
-      @subject = data['subject']
-      @status = data['status']['name']
+      if data
+        @subject = data['subject']
+        @status = data['status']['name']
+      end
     end
 
     # Add a note to the Issue

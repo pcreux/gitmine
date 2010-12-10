@@ -9,6 +9,8 @@ class Gitmine::CLI
       checkout
     when "delete", "del"
       delete
+    when "for_deploy", "reviewed"
+      reviewed
     else
       puts <<-EOS
 Usage:
@@ -44,5 +46,9 @@ EOS
 
   def self.delete
     Gitmine.delete(ARGV[1])
+  end
+
+  def self.reviewed
+    Gitmine.reviewed(ARGV[1])
   end
 end

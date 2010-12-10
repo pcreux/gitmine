@@ -8,12 +8,6 @@ describe Gitmine::Issue do
     end
   end
 
-  describe "#config" do
-    it "should load the config from config.yml" do
-      Gitmine::Issue.config.should == {"host"=>"http://redmine-gitmine.heroku.com", "github" => "pcreux/gitmine"}
-    end
-  end
-
   describe "#get_for_commit" do
     it "should parse the commit message to find a commit_id and call #get" do
       commit_msg = 'A commit msg Issue #123'

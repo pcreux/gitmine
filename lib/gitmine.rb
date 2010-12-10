@@ -5,6 +5,7 @@ require 'yaml'
 require 'httparty'
 
 class Gitmine
+
   def self.list
     gm = Gitmine.new
     gm.commits.each do |commit|
@@ -29,7 +30,6 @@ class Gitmine
   def self.branch(branch_name)
     issue_id = branch_name[/^\d+/]
     original_branch = File.read('./.git/HEAD').match(/^ref: refs\/heads\/(.+)/)[1]
-    config = Issue.config
 
     raise "Invalid branch name. It should start with the issue number" unless issue_id
 
@@ -48,9 +48,9 @@ class Gitmine
 
     puts "Adding a note to the Issue ##{issue_id}"
     note = "Branch *#{branch_name}* created from #{original_branch}"
-    if config['github']
-      note << %{ - "See on Github":https://github.com/#{config['github']}/tree/#{branch_name}}
-      note << %{ - "Compare on Github":https://github.com/#{config['github']}/compare/#{original_branch}...#{branch_name}}
+    if Config.github
+      note << %{ - "See on Github":https://github.com/#{Config.github}/tree/#{branch_name}}
+      note << %{ - "Compare on Github":https://github.com/#{Config.github}/compare/#{original_branch}...#{branch_name}}
     end
 
     puts 'Done!' if Issue.find(issue_id).add_note(note)
@@ -97,6 +97,6 @@ class Gitmine
 end
 
 
-%w(issue commit cli colors branch git).each do |filename|
+%w(config issue commit cli colors branch git).each do |filename|
   require File.dirname(__FILE__) + "/gitmine/#{filename}.rb"
 end

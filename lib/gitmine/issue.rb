@@ -1,14 +1,7 @@
 class Gitmine
   class Issue
-    CONFIG_FILE = './.gitmine.yml'
-
     attr_reader :id, :subject, :status
     
-    # Config from .gitmine.yml
-    def self.config
-      @@config ||= YAML.load_file(CONFIG_FILE)
-    end
-
     # Extract the issue_id from a commit message.
     # Examples:
     #   CommitMsgToIssueId.parse("Message for Issue #123.")
@@ -42,6 +35,10 @@ class Gitmine
       RemoteBranch.find(self.id)
     end
 
+    def delete_hudson_projects
+      hudson_projects.map(&:delete!)
+    end
+
     # Get attributes from redmine and set them all
     def build_via_issue_id(issue_id)
       @id = issue_id
@@ -59,13 +56,13 @@ class Gitmine
       if response.code == 200
         return true
       else
-        raise response.response
+        raise response.response.to_s
       end
     end
 
     include HTTParty
-    base_uri "#{config['host']}/issues/"
-    basic_auth config['api_key'], '' # username is api_key, password is empty
+    base_uri "#{Gitmine::Config.redmine_host}/issues/"
+    basic_auth Gitmine::Config.redmine_api_key, '' # username is api_key, password is empty
     headers 'Content-type' => 'text/xml' # by-pass rails authenticity token mechanism
 
     protected
@@ -78,5 +75,10 @@ class Gitmine
     def http_get(issue_id)
       self.class.get(url(issue_id))
     end
+
+    def hudson_projects
+      HudsonProject.find_by_name_including(self.id)
+    end
+
   end
 end

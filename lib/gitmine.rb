@@ -52,6 +52,8 @@ class Gitmine
       note << %{ - "See on Github":https://github.com/#{Config.github}/tree/#{branch_name}}
       note << %{ - "Compare on Github":https://github.com/#{Config.github}/compare/#{original_branch}...#{branch_name}}
     end
+
+    issue.add_note(note)
   end
 
   # TODO specs

@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{gitmine}
-  s.version = "0.1.5"
+  s.version = "0.1.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Philippe Creux"]
-  s.date = %q{2010-11-24}
+  s.date = %q{2010-12-10}
   s.default_executable = %q{gitmine}
   s.description = %q{Git log with status of associated redmine tickets}
   s.email = %q{pcreux@gmail.com}
@@ -32,15 +32,21 @@ Gem::Specification.new do |s|
      "bin/gitmine",
      "gitmine.gemspec",
      "lib/gitmine.rb",
+     "lib/gitmine/branch.rb",
      "lib/gitmine/cli.rb",
+     "lib/gitmine/colors.rb",
      "lib/gitmine/commit.rb",
-     "lib/gitmine/gitmine.rb",
+     "lib/gitmine/config.rb",
+     "lib/gitmine/git.rb",
+     "lib/gitmine/hudson_job.rb",
      "lib/gitmine/issue.rb",
      "spec/commit_msg_to_issue_id_spec.rb",
      "spec/commit_spec.rb",
      "spec/config.yml",
      "spec/gitmine_spec.rb",
      "spec/issue_spec.rb",
+     "spec/lib/branch_spec.rb",
+     "spec/lib/config_spec.rb",
      "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/pcreux/gitmine}
@@ -53,6 +59,8 @@ Gem::Specification.new do |s|
      "spec/commit_spec.rb",
      "spec/gitmine_spec.rb",
      "spec/issue_spec.rb",
+     "spec/lib/branch_spec.rb",
+     "spec/lib/config_spec.rb",
      "spec/spec_helper.rb"
   ]
 

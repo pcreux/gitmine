@@ -36,7 +36,9 @@ class Gitmine
     end
 
     def delete_hudson_jobs
-      hudson_jobs.map(&:delete!)
+      if Config.hudson_host
+        hudson_jobs.map(&:delete!)
+      end
     end
 
     # Get attributes from redmine and set them all

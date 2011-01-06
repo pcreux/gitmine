@@ -22,6 +22,10 @@ gitmine checkout ISSUE_ID
   Checkout remote/local branch starting with ISSUE_ID
   Example: gitmine checkout 1234
 
+gitmine reviewed ISSUE_ID
+  Merge the branch to master, delete remote branch, delete hudson jobs (if any), update redmine issue status
+  Example: gitmine reviewed 1234
+
 gitmine delete ISSUE_ID
   Delete remote branch starting with ISSUE_ID
   Example: gitmine delete 1234

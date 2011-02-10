@@ -20,15 +20,15 @@ class Gitmine
       end
 
       def hudson_host
-        config['hudson']['host']
+        (config['hudson'] || {})['host']
       end
 
       def hudson_username
-        config['hudson']['username']
+        (config['hudson'] || {})['username']
       end
 
       def hudson_password
-        config['hudson']['password']
+        (config['hudson'] || {})['password']
       end
 
       def statuses

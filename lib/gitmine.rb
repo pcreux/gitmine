@@ -10,7 +10,7 @@ class Gitmine
     gm = Gitmine.new
     gm.commits.each do |commit|
       status = commit.issue ? commit.issue.status : 'N/A'
-      puts "#{commit.id[0..6]} #{status.ljust(12)} #{commit.committer.name.ljust(15)} #{commit.message[0..50].gsub("\n", '')}"
+      puts "#{commit.id[0..6]} #{status.ljust(12)} #{(commit.committer.name || "").ljust(15)} #{commit.message[0..50].gsub("\n", '')}"
     end
   end
 

@@ -81,6 +81,10 @@ class Gitmine
 
   # TODO specs
   def self.reviewed(issue_id)
+    checkout(issue_id)
+    # Make sure we get the latest commits
+    Git.pull
+
     issue = Issue.find(issue_id)
 
     puts yellow("Merge #{issue_id} to master and push")

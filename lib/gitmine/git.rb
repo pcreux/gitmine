@@ -27,6 +27,10 @@ class Gitmine::Git
       run_cmd("git push")
     end
 
+    def pull
+      run_cmd("git pull")
+    end
+
     def delete_remote_branch(branch)
       run_cmd("git push origin :#{branch}")
     end

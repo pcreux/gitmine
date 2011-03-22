@@ -35,12 +35,6 @@ class Gitmine
       RemoteBranch.find(self.id)
     end
 
-    def delete_hudson_jobs
-      if Config.hudson_host
-        hudson_jobs.map(&:delete!)
-      end
-    end
-
     # Get attributes from redmine and set them all
     def build_via_issue_id(issue_id)
       @id = issue_id
@@ -84,10 +78,5 @@ class Gitmine
     def http_get(issue_id)
       self.class.get(url(issue_id))
     end
-
-    def hudson_jobs
-      HudsonJob.all_by_name_including(self.id)
-    end
-
   end
 end

@@ -93,15 +93,12 @@ class Gitmine
     puts yellow("Delete remote branch")
     issue.remote_branch.delete
 
-    puts yellow("Delete hudson jobs")
-    issue.delete_hudson_jobs
-
     puts yellow("Set Ticket status to 'reviewed'")
     issue.update_status("reviewed")
   end
 end
 
 
-%w(config issue commit cli colors branch git hudson_job).each do |filename|
+%w(config issue commit cli colors branch git).each do |filename|
   require File.dirname(__FILE__) + "/gitmine/#{filename}.rb"
 end

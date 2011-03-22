@@ -85,6 +85,7 @@ class Gitmine
 
     def merge_to_master
       Git.checkout("master")
+      Git.pull
       Git.merge(self.name)
       Git.push
     end

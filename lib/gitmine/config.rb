@@ -19,18 +19,6 @@ class Gitmine
         config['github']
       end
 
-      def hudson_host
-        (config['hudson'] || {})['host']
-      end
-
-      def hudson_username
-        (config['hudson'] || {})['username']
-      end
-
-      def hudson_password
-        (config['hudson'] || {})['password']
-      end
-
       def statuses
         config['statuses']
       end

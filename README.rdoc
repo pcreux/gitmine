@@ -4,31 +4,62 @@ Gitmine displays the last 10 commits of your repo and their associated redmine t
 
 == Install
 
-  gem install gitmine
+    gem install gitmine
 
 == Setup
 
 Put the config file '.gitmine.yml' at the root of your project. Here is a sample file:
 
-  host:     'https://redmine.yourcompany.com
-  # Api key is required for private projects only.
-  api_key:  'your_api_key'
+    host:     'http://redmine-gitmine.heroku.com/'
+    github:   'pcreux/gitmine'
+    # Api key is required for private projects only.
+    api_key:  'your_api_key'
 
 == Usage
 
-* Display the latest 10 commits and there ticket status:
+=== gitmine branch BRANCH_NAME
 
-  $> gitmine
-  8497d68 In Progress  Philippe Creux  Add branch command. Need refactoring.Issue #10
-  b0132d2 Closed       Philippe Creux  Gitmine now works on case sensitive FS. Issue #8
-  b77fb0c N/A          Philippe Creux  Add Greg Bell as an awesome contributor.
-  9f3e464 N/A          Greg Bell       Moved CommitMsgToIssueId module into the Gitmine::I
+Create a new branch, push to origin, add github links to gitmine ticket
 
-* Create a new remote branch + a tracking branch + add a note to the associated ticket:
+Example: 
 
-  $> gitmine branch 10-add-branch
+    gitmine branch 1234-my-branch
 
-See here: http://redmine-gitmine.heroku.com/issues/10#note-1
+See here: http://redmine-gitmine.heroku.com/issues/10
+
+=== gitmine checkout ISSUE_ID
+
+Checkout remote/local branch starting with ISSUE_ID
+
+Example: 
+
+    gitmine checkout 1234
+
+=== gitmine reviewed ISSUE_ID
+
+Merge the branch to master, delete remote branch, update redmine issue status
+
+Example: 
+
+    gitmine reviewed 1234
+
+=== gitmine delete ISSUE_ID
+
+Delete remote branch starting with ISSUE_ID
+
+Example: 
+
+    gitmine delete 1234
+
+=== gitmine log
+
+Displays latest 10 commits and the status of their associated Redmine tickets
+
+    $> gitmine log
+    8497d68 In Progress  Philippe Creux  Add branch command. Need refactoring.Issue #10
+    b0132d2 Closed       Philippe Creux  Gitmine now works on case sensitive FS. Issue #8
+    b77fb0c N/A          Philippe Creux  Add Greg Bell as an awesome contributor.
+    9f3e464 N/A          Greg Bell       Moved CommitMsgToIssueId module into the Gitmine::I
 
 == Note on Issues
 

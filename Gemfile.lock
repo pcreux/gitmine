@@ -22,6 +22,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  grit (= 2.0.0)
-  httparty (= 0.6.1)
+  grit (>= 2.0.0)
+  httparty (>= 0.6.1)
   rspec (>= 2.0.0)

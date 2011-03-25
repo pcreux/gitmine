@@ -1,6 +1,6 @@
 class Gitmine
   class Issue
-    attr_reader :id, :subject, :status
+    attr_reader :id, :subject, :status, :assigned_to
     
     # Extract the issue_id from a commit message.
     # Examples:
@@ -42,6 +42,7 @@ class Gitmine
       if data
         @subject = data['subject']
         @status = data['status']['name']
+        @assigned_to = (data['assigned_to'] || {})['name']
       end
     end
 

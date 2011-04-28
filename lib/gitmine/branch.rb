@@ -31,15 +31,15 @@ class Gitmine
       #   ['123-my-branch', '1234-your-branch']
       # TODO specs
       def local_branches
-        return @@local_branches if defined?(@@local_branches) && @@local_branches
         branches = []
+
         Git.local_branches.each_line do |line|
           if match = line[/\d+.*$/]
             branches << match
           end
         end
 
-        @@local_branches = branches
+        branches
       end
 
       # Return an array of remote branches
@@ -80,7 +80,7 @@ class Gitmine
 
   class LocalBranch < Branch
     def name
-      @name ||= Branch.find_local(issue_id)
+      Branch.find_local(issue_id)
     end
 
     def merge_to_master
@@ -93,7 +93,7 @@ class Gitmine
 
   class RemoteBranch < Branch
     def name
-      @name ||= Branch.find_remote(issue_id)
+      Branch.find_remote(issue_id)
     end
 
     def delete

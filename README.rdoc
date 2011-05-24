@@ -10,13 +10,15 @@ Gitmine displays the last 10 commits of your repo and their associated redmine t
 
 Put the config file '.gitmine.yml' at the root of your project. Here is a sample file:
 
-    host:     'http://redmine-gitmine.heroku.com/'
+    host:     'http://redmine-gitmine.heroku.com'
     github:   'pcreux/gitmine'
     # Redmine API key is required for private Redmine projects only.
     api_key:  'your_api_key'
     statuses:
-      # Should be the database id of the closed / deployed status
-      reviewed: 5 
+      # Should be the database id of the closed / deployed status in Redmine
+      reviewed: 5
+      # Should be the database id of the staged status in Redmine
+      staged: 3 
 
 == Usage
 
@@ -37,6 +39,14 @@ Checkout remote/local branch starting with ISSUE_ID
 Example: 
 
     gitmine checkout 1234
+
+=== gitmine stage ISSUE_ID
+
+Merge the branch to staging, update redmine issue status
+
+Example: 
+
+    gitmine stage 1234
 
 === gitmine reviewed ISSUE_ID
 

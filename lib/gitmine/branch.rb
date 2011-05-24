@@ -83,6 +83,13 @@ class Gitmine
       Branch.find_local(issue_id)
     end
 
+    def merge_to_staging
+      Git.checkout("staging")
+      Git.pull
+      Git.merge(self.name)
+      Git.push
+    end
+
     def merge_to_master
       Git.checkout("master")
       Git.pull

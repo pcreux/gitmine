@@ -1,6 +1,6 @@
 class Gitmine
   class Config
-    HOME_CONFIG_FILE = '~/.gitmine.yml'
+    HOME_CONFIG_FILE = "#{ENV['HOME']}/.gitmine.yml"
     CONFIG_FILE = './.gitmine.yml'
 
     class << self
@@ -30,6 +30,7 @@ class Gitmine
     end
 
     def initialize
+      debugger
       # Read from the home .gitmine.yml file first, then merge the local file on top of it to provide proper overrides
       home_path = HOME_CONFIG_FILE
       path = CONFIG_FILE

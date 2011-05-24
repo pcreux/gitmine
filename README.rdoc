@@ -12,8 +12,11 @@ Put the config file '.gitmine.yml' at the root of your project. Here is a sample
 
     host:     'http://redmine-gitmine.heroku.com/'
     github:   'pcreux/gitmine'
-    # Api key is required for private projects only.
+    # Redmine API key is required for private Redmine projects only.
     api_key:  'your_api_key'
+    statuses:
+      # Should be the database id of the closed / deployed status
+      reviewed: 5 
 
 == Usage
 

@@ -80,6 +80,21 @@ class Gitmine
   end
 
   # TODO specs
+  def self.stage(issue_id)
+    checkout(issue_id)
+    # Make sure we get the latest commits
+    Git.pull
+
+    issue = Issue.find(issue_id)
+
+    puts yellow("Merge #{issue_id} to develop and push")
+    issue.local_branch.merge_to_staging
+
+    puts yellow("Set Ticket status to 'staged'")
+    issue.update_status("staged")
+  end
+
+  # TODO specs
   def self.reviewed(issue_id)
     checkout(issue_id)
     # Make sure we get the latest commits

@@ -1,5 +1,6 @@
 class Gitmine
   class Config
+    HOME_CONFIG_FILE = "#{ENV['HOME']}/.gitmine.yml"
     CONFIG_FILE = './.gitmine.yml'
 
     class << self
@@ -29,8 +30,9 @@ class Gitmine
     end
 
     def initialize
-      path = CONFIG_FILE
-      @config = YAML.load_file(path)
+      # Read from the home .gitmine.yml file first, then merge the local file on top of it to provide proper overrides
+      home_config = File.exists?(HOME_CONFIG_FILE) ? YAML.load_file(HOME_CONFIG_FILE) : {}
+      @config = home_config.merge(YAML.load_file(CONFIG_FILE))
     end
 
     def [](key)

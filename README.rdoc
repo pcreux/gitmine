@@ -14,6 +14,11 @@ Put the config file '.gitmine.yml' at the root of your project. Here is a sample
     github:   'pcreux/gitmine'
     # Api key is required for private projects only.
     api_key:  'your_api_key'
+    statuses:
+      # Should be the database id of the closed / deployed status in Redmine
+      reviewed: 5
+
+You can also put config value in your home directory under '~/.gitmine.yml'.  This is a great place to store host, api_key and statuses if they do not change from project to project.  Values in the local .gitmine.yml always override those in the home directory.
 
 == Usage
 

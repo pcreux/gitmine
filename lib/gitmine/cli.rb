@@ -9,6 +9,8 @@ class Gitmine::CLI
       checkout
     when "delete", "del"
       delete
+    when "stage", "staged"
+      stage
     when "for_deploy", "reviewed"
       reviewed
     else
@@ -21,6 +23,10 @@ gitmine branch BRANCH_NAME
 gitmine checkout ISSUE_ID
   Checkout remote/local branch starting with ISSUE_ID
   Example: gitmine checkout 1234
+
+gitmine stage ISSUE_ID
+  Merge the branch to staging, update redmine issue status
+  Example: gitmine stage 1234
 
 gitmine reviewed ISSUE_ID
   Merge the branch to master, delete remote branch, update redmine issue status
@@ -50,6 +56,10 @@ EOS
 
   def self.delete
     Gitmine.delete(ARGV[1])
+  end
+
+  def self.stage
+    Gitmine.stage(ARGV[1])
   end
 
   def self.reviewed

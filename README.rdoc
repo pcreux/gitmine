@@ -56,6 +56,17 @@ Example:
 
     gitmine delete 1234
 
+
+=== gitmine status
+  Show status of the current branch's issue.
+
+    $> gitmine status
+    For Review - Add Credit card support (Sam Reh)
+
+=== gitmine open
+
+  Open current branch's issue in web browser.
+
 === gitmine log
 
 Displays latest 10 commits and the status of their associated Redmine tickets

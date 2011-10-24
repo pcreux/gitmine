@@ -27,5 +27,5 @@ PLATFORMS
 DEPENDENCIES
   grit (>= 2.0.0)
   httparty (>= 0.6.1)
-  launchy (>= 2.0.0)
+  launchy (>= 0.3.7)
   rspec (>= 2.0.0)

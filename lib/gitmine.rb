@@ -3,6 +3,7 @@ require 'rubygems'
 require 'grit'
 require 'yaml'
 require 'httparty'
+require 'launchy'
 
 class Gitmine
 
@@ -12,6 +13,27 @@ class Gitmine
       status = commit.issue.status if commit.issue
       status ||= 'N/A'
       puts "#{commit.id[0..6]} #{status.ljust(12)} #{(commit.committer.name || "").ljust(15)} #{commit.message[0..50].gsub("\n", '')}"
+    end
+  end
+
+  def self.status
+    Gitmine.new.status
+  end
+
+  def status
+    if issue
+      puts "#{bold(issue.status)} - #{issue.subject} #{blue("(#{issue.assigned_to})")}"
+    end
+  end
+
+  def self.open
+    Gitmine.new.open
+  end
+
+  def open
+    issue_url = "#{Config.redmine_host}/issues/#{issue_id}"
+    if issue
+      Launchy.open issue_url
     end
   end
 
@@ -26,6 +48,19 @@ class Gitmine
     end
   end
 
+  def issue_id
+    @branch[/^\d+/]
+  end
+
+  # Return issue for current branch or nil
+  def issue
+    if issue_id 
+      Issue.find(issue_id)
+    else
+      puts "No issue found for branch #{@branch}"
+      nil
+    end
+  end
 
   # TODO specs
   def self.branch(branch_name)

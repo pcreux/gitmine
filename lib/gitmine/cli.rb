@@ -11,6 +11,10 @@ class Gitmine::CLI
       delete
     when "for_deploy", "reviewed"
       reviewed
+    when "open"
+      open
+    when "status"
+      status
     else
       puts <<-EOS
 Usage:
@@ -29,6 +33,12 @@ gitmine reviewed ISSUE_ID
 gitmine delete ISSUE_ID
   Delete remote branch starting with ISSUE_ID
   Example: gitmine delete 1234
+
+gitmine status
+  Show status of the current branch's issue
+
+gitmine open
+  Open current branch's issue in web browser
 
 gitmine log
   Displays latest 10 commits and the status of their associated Redmine tickets
@@ -54,5 +64,13 @@ EOS
 
   def self.reviewed
     Gitmine.reviewed(ARGV[1])
+  end
+
+  def self.open
+    Gitmine.open
+  end
+
+  def self.status
+    Gitmine.status
   end
 end

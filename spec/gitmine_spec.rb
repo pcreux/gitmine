@@ -62,5 +62,11 @@ describe Gitmine do
 
       Gitmine.branch('1234')
     end
+
+    it 'should raise an exception no number is given' do
+      lambda {
+        Gitmine.branch('bad-branch-name')
+      }.should raise_error("Invalid branch name. It should start with an issue number")
+    end
   end
 end

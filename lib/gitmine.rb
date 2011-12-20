@@ -67,7 +67,7 @@ class Gitmine
     issue_id = branch_name[/^\d+/]
     original_branch = File.read('./.git/HEAD').match(/^ref: refs\/heads\/(.+)/)[1]
 
-    raise "Invalid branch name. It should start with an issue number" unless branch_name[/^\d+/]
+    raise "Invalid branch name. It should start with an issue number" unless issue_id
 
     issue = Issue.find(issue_id)
     raise "Issue ##{issue_id} does not exists" if issue.nil?

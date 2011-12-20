@@ -67,11 +67,12 @@ class Gitmine
     issue_id = branch_name[/^\d+/]
     original_branch = File.read('./.git/HEAD').match(/^ref: refs\/heads\/(.+)/)[1]
 
-    raise "Invalid branch name. It should look like 123-my-branch" unless branch_name[/^\d+-/]
-
     issue = Issue.find(issue_id)
-
     raise "Issue ##{issue_id} does not exists" if issue.nil?
+
+    unless branch_name[/^\d+-/]
+      branch_name = branch_name + "-" + issue.subject.gsub(/\s/,"-")
+    end
 
     puts yellow("Create the branch #{branch_name}")
     run_cmd("git checkout -b #{branch_name}")

@@ -54,7 +54,7 @@ class Gitmine
 
   # Return issue for current branch or nil
   def issue
-    if issue_id 
+    if issue_id
       Issue.find(issue_id)
     else
       puts "No issue found for branch #{@branch}"
@@ -67,11 +67,14 @@ class Gitmine
     issue_id = branch_name[/^\d+/]
     original_branch = File.read('./.git/HEAD').match(/^ref: refs\/heads\/(.+)/)[1]
 
-    raise "Invalid branch name. It should look like 123-my-branch" unless branch_name[/^\d+-/]
+    raise "Invalid branch name. It should start with an issue number" unless issue_id
 
     issue = Issue.find(issue_id)
-
     raise "Issue ##{issue_id} does not exists" if issue.nil?
+
+    unless branch_name[/^\d+-/]
+      branch_name = branch_name + "-" + issue.subject.gsub(/\s/,"-")
+    end
 
     puts yellow("Create the branch #{branch_name}")
     run_cmd("git checkout -b #{branch_name}")

@@ -10,8 +10,9 @@ Gitmine displays the last 10 commits of your repo and their associated redmine t
 
 Put the config file '.gitmine.yml' at the root of your project. Here is a sample file:
 
-    host:     'http://redmine-gitmine.heroku.com/'
-    github:   'pcreux/gitmine'
+    host:       'http://redmine-gitmine.heroku.com/'
+    github:     'pcreux/gitmine'                      #optional
+    bitbucket:  'sfsafsfsa'                           #optional
     # Api key is required for private projects only.
     api_key:  'your_api_key'
     statuses:
@@ -24,9 +25,9 @@ You can also put config value in your home directory under '~/.gitmine.yml'.  Th
 
 === gitmine branch BRANCH_NAME
 
-Create a new branch, push to origin, add github links to gitmine ticket
+Create a new branch, push to origin, add github / bitbucket links to gitmine ticket
 
-Example: 
+Example:
 
     gitmine branch 1234-my-branch
 
@@ -36,7 +37,7 @@ See here: http://redmine-gitmine.heroku.com/issues/10
 
 Checkout remote/local branch starting with ISSUE_ID
 
-Example: 
+Example:
 
     gitmine checkout 1234
 
@@ -44,7 +45,7 @@ Example:
 
 Merge the branch to master, delete remote branch, update redmine issue status
 
-Example: 
+Example:
 
     gitmine reviewed 1234
 
@@ -52,7 +53,7 @@ Example:
 
 Delete remote branch starting with ISSUE_ID
 
-Example: 
+Example:
 
     gitmine delete 1234
 
@@ -86,9 +87,10 @@ Displays latest 10 commits and the status of their associated Redmine tickets
 
 * Philippe Creux  http://github.com/pcreux
 * Greg Bell       http://github.com/gregbell
+* David Collom    http://github.com/davidcollom
 
 == Note on Patches/Pull Requests
- 
+
 * Fork the project.
 * Make your feature addition or bug fix.
 * Add tests for it. This is important so I don't break it in a

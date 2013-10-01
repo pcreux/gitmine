@@ -19,7 +19,7 @@ class Gitmine::CLI
       puts <<-EOS
 Usage:
 gitmine branch BRANCH_NAME
-  Create a new branch, push to origin, add github links to gitmine ticket
+  Create a new branch, push to origin, add github/bitbucket links to gitmine ticket
   Example: gitmine branch 1234-my-branch
 
 gitmine checkout ISSUE_ID

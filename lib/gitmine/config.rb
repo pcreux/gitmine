@@ -20,6 +20,10 @@ class Gitmine
         config['github']
       end
 
+      def bitbucket
+        config['bitbucket']
+      end
+
       def statuses
         config['statuses']
       end

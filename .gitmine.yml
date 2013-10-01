@@ -1,2 +1,3 @@
-host:     'http://redmine-gitmine.heroku.com'
-github:   'pcreux/gitmine'
+host:      'http://redmine-gitmine.heroku.com'
+github:    'pcreux/gitmine'
+bitbucket: 'davidcollom/paasmaker'

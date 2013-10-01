@@ -88,8 +88,8 @@ class Gitmine
       note << %{ - "See on Github":https://github.com/#{Config.github}/tree/#{branch_name}}
       note << %{ - "Compare on Github":https://github.com/#{Config.github}/compare/#{original_branch}...#{branch_name}}
     elsif Config.bitbucket
-      note << %{ - "See on Bitbucket":https://bitbucket.org/#{Config.github}/tree/#{branch_name}}
-      note << %{ - "Compare on Bitbucket":https://bitbucket.org/#{Config.github}/compare/#{original_branch}...#{branch_name}#diff}
+      note << %{ - "See on Bitbucket":https://bitbucket.org/#{Config.bitbucket}/tree/#{branch_name}}
+      note << %{ - "Compare on Bitbucket":https://bitbucket.org/#{Config.bitbucket}/compare/#{original_branch}...#{branch_name}#diff}
     end
 
     issue.add_note(note)
